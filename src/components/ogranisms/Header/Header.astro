@@ -1,7 +1,7 @@
 ---
-import HeaderMobile from './HeaderMobile.astro';
+import HeaderMobile from './HeaderMobile.tsx';
 import HeaderDesktop from './HeaderDesktop.astro';
-import Wrapper from '../../layouts/Wrapper.astro';
+import Wrapper from '../../layouts/Wrapper';
 import Container from '../../layouts/Container.astro';
 
 const nav = [
@@ -26,6 +26,6 @@ const nav = [
 <Wrapper className='mt-10'>
   <Container>
     <HeaderDesktop nav={nav} />
-    <HeaderMobile nav={nav} />
+    <HeaderMobile nav={nav} client:only />
   </Container>
 </Wrapper>

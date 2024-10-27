@@ -1,14 +1,16 @@
 import { tv } from 'tailwind-variants';
 import React, { useState } from 'react';
 
-/* Typescript */
+/* Types */
 export enum ButtonBurgerColor {
   Black = 'black',
   White = 'white',
 }
 
 interface ButtonBurgerProps {
-  color: ButtonBurgerColor,
+  color: ButtonBurgerColor;
+  active?: boolean;
+  onClick: () => void;
 }
 
 /* Style */
@@ -69,19 +71,19 @@ const lineBottom = tv({
 
 /* Component */
 const ButtonBurger = (props: ButtonBurgerProps) => {
-  const { color } = props;
+  const { color, active,  onClick } = props;
 
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
-    setIsActive(!isActive);
+    onClick();
   };
 
   return (
     <button className={buttonBurger({color})} onClick={handleClick}>
       <div className="w-[30px] h-[12px] relative">
-        <div className={lineTop({color, state: isActive ? 'active':'inactive'})}></div>
-        <div className={lineBottom({color, state: isActive ? 'active':'inactive'})}></div>
+        <div className={lineTop({color, state: active ? 'active':'inactive'})}></div>
+        <div className={lineBottom({color, state: active ? 'active':'inactive'})}></div>
       </div>
     </button>
   );

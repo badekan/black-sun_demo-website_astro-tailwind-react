@@ -5,7 +5,7 @@ import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant';
 import type { IconName } from './Icon';
 import Icon from './Icon';
 
-/* Typescript */
+/* Types */
 export enum ButtonVariant {
   Primary = 'primary',
   Black = 'black',
