@@ -1,10 +1,10 @@
 ---
 import { tv } from 'tailwind-variants';
 import { Image } from 'astro:assets';
-import ImgHeroWidget from '../../img/hero-widgets.jpg';
+import ImgHeroLandingWidgets from '../../../img/hero-landing-widgets.jpg';
 
-import HeroSolutions from './HeroSolutions.astro';
-import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant';
+import HeroSolutions from './HeroLandingWidgetsSolutions.astro';
+import hoverBaseAndVariant from '../../../utils/hoverBaseAndVariant';
 
 const heroLandingWidgetsNumber = tv({
   extend: hoverBaseAndVariant,
@@ -28,7 +28,7 @@ const heroLandingWidgetsNumber = tv({
       <p class="text-lg leading-tight">Talented team member</p>
     </div>
     <div class="bg-gray-200 w-full h-1/2 grow rounded-2xl overflow-hidden relative">
-      <Image class="object-cover w-full h-full absolute" src={ImgHeroWidget} alt="." />
+      <Image class="object-cover w-full h-full absolute" src={ImgHeroLandingWidgets} alt="." />
     </div>
   </div>
 </div>

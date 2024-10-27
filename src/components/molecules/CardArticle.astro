@@ -2,13 +2,13 @@
 import { tv } from 'tailwind-variants';
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets';
-import ImgHeroWidget from '../../img/hero-widgets.jpg';
 import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant';
 
 interface Props {
   title: string;
+  img: any;
 }
-const { title } = Astro.props;
+const { title, img } = Astro.props;
 const roundedCard = "rounded-xl";
 
 const cardArticleBody = tv({
@@ -32,7 +32,7 @@ const cardArticleBody = tv({
         <span class="text-xs"> Design</span>
       </div>
     </div>
-    <Image class={`object-cover w-full h-full absolute ${roundedCard}`} src={ImgHeroWidget} alt="." />
+    <Image class={`object-cover w-full h-full absolute ${roundedCard}`} src={img} alt="." />
   </div>
   <!-- BODY -->
   <button class={cardArticleBody({color:'gray'})}>

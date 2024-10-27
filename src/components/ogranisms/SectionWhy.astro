@@ -1,8 +1,9 @@
 ---
 import Section from '../layouts/Section.astro';
 import { Image } from 'astro:assets';
-import ImgHeroWidget from '../../img/hero-widgets.jpg';
-import Button, { ButtonIcon } from '../atoms/Button.astro';
+import ImgSectionWhy from '../../img/section-why@2x.jpg';
+import Button from '../atoms/Button';
+import { IconName } from '../atoms/Icon';
 
 const paddingGapDesktop = "md:pr-8 md:pb-8";
 const imageGapDesktop = "md:left-8 md:top-8";
@@ -17,7 +18,7 @@ const imageGap = `${imageGapDesktop} ${imageGapMobile}`;
       <div class="w-full md:max-w-col6">
         <div class={`w-full ${paddingGap}`}>
           <div class="w-full aspect-[514/376] bg-gray-200 rounded-2xl relative">
-            <Image class={`object-cover w-full h-full absolute ${imageGap} rounded-2xl`} src={ImgHeroWidget} alt="." />
+            <Image class={`object-cover w-full h-full absolute ${imageGap} rounded-2xl`} src={ImgSectionWhy} alt="." />
           </div>
         </div>
       </div>
@@ -29,7 +30,7 @@ const imageGap = `${imageGapDesktop} ${imageGapMobile}`;
         <div class="text-lg leading-normal max-w-[450px]">
           <p>We work with the most successful businesses, in the world, giving you an unmatched level ofexpertise and experience.</p>
         </div>
-        <Button label="Schedule Call" icon={ButtonIcon.Chat} className="mt-9" />
+        <Button label="Schedule Call" icon={IconName.Chat} className="mt-9" />
       </div>
     </div>
 </Section>

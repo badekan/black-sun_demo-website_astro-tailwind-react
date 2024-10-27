@@ -2,13 +2,14 @@
 import { tv } from 'tailwind-variants';
 import { Icon } from 'astro-icon/components'
 
-import Button, { ButtonIcon } from '../atoms/Button.astro';
+import Button from '../atoms/Button';
 import Container from '../layouts/Container.astro';
 import Wrapper from '../layouts/Wrapper.astro';
 
 import { Image } from 'astro:assets';
-import ImgHeroWidget from '../../img/hero-widgets.jpg';
+import ImgCtaBlock from '../../img/cta-block.jpg';
 import Logo, { LogoSize } from '../atoms/Logo.astro';
+import { IconName } from '../atoms/Icon';
 
 const footerSolutionsItems = [
   {
@@ -113,7 +114,7 @@ const footerLink = tv({
         <div class="bg-white/[.2] px-6 py-8 lg:px-9 lg:py-9 w-full  lg:w-auto">
           <div class="h-5 lg:h-auto"></div>
           <div class=" flex items-center gap-6">
-            <Image class={`aspect-square rounded-lg max-w-24`} src={ImgHeroWidget} alt="." />
+            <Image class={`aspect-square rounded-lg max-w-24`} src={ImgCtaBlock} alt="." />
             <div class="text-white text-nowrap">
               <p class="font-semibold text-lg leading-tight">Time Rogier</p>
               <p class="text-sm">CEO</p>
@@ -127,7 +128,7 @@ const footerLink = tv({
             `absolute bottom-0 -translate-x-1/2 left-1/2 translate-y-[6px] -rotate-90 origin-bottom-left`,
             ].join(' ')}/>
           <div class="text-white text-lg"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum voluptas accusantium cum odio nam nesciunt illo nostrum quia.</p></div>
-          <Button label="Schedule Call" icon={ButtonIcon.Chat} className="shrink-0"/>
+          <Button label="Schedule Call" icon={IconName.Chat} className="shrink-0" />
         </div>
       </div>
     </Container>
@@ -152,12 +153,12 @@ const footerLink = tv({
           </ul>
           <ul class="flex gap-3">
             <li>
-              <a href="#" class="text-black hover:opacity-50 transition-all">
+              <a href="#" class="text-black hover:opacity-50 transition-all" aria-label="instagram">
                 <Icon name="instagram" class="w-[20px] h-[22px]" />
               </a>
             </li>
             <li>
-              <a href="#" class="text-black hover:opacity-50 transition-all">
+              <a href="#" class="text-black hover:opacity-50 transition-all" aria-label="linkedin">
                 <Icon name="linkedin" class="w-[20px] h-[20px]"/>
               </a>
             </li>

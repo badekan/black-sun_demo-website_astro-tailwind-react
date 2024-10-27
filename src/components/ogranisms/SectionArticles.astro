@@ -6,28 +6,33 @@ import CardArticle from '../molecules/CardArticle.astro';
 import { Icon } from 'astro-icon/components';
 import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant';
 
+import ImgArticle1 from '../../img/article-1.jpg';
+import ImgArticle2 from '../../img/article-2.jpg';
+import ImgArticle3 from '../../img/article-3.jpg';
+import ImgArticle4 from '../../img/article-4.jpg';
+import ImgArticle5 from '../../img/article-5.jpg';
+
 const cardArticles = [
   {
-    title: 'Some title about an article'
+    title: 'Some title about an article',
+    img: ImgArticle1,
   },
   {
-    title: 'Some title about an article'
+    title: 'Some title about an article',
+    img: ImgArticle2,
   },
   {
-    title: 'Some title about an article'
+    title: 'Some title about an article',
+    img: ImgArticle3,
   },
   {
-    title: 'Some title about an article'
+    title: 'Some title about an article',
+    img: ImgArticle4,
   },
   {
-    title: 'Some title about an article'
-  },
-  {
-    title: 'Some title about an article'
-  },
-  {
-    title: 'Some title about an article'
-  },
+    title: 'Some title about an article',
+    img: ImgArticle5,
+  }
 ];
 
 const swiperButton = tv({
@@ -43,7 +48,7 @@ const swiperButton = tv({
 });
 
 ---
-<Section>
+<Section className='overflow-x-clip'>
   <Container className="max-w-col6 text-center mb-14 sm:mb-20">
     <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold mb-4">
       Kepp aware of the last trends
@@ -59,17 +64,17 @@ const swiperButton = tv({
       <!-- Slides -->
       {cardArticles.map((cardArticle, index) => (
         <div class="swiper-slide">
-          <CardArticle title={cardArticle.title} /> 
+          <CardArticle title={cardArticle.title} img={cardArticle.img} /> 
         </div>
       ))}
     </div>
   </div>
   <div class="flex gap-6 md:gap-8 items-center justify-center mt-16">
-    <button class={swiperButton({color: 'black', class:"swiper-button-prev"})}>
+    <button class={swiperButton({color: 'black', class:"swiper-button-prev"})} aria-label="previous">
       <Icon name="arrow-prev"/>
     </button>
     <div class="swiper-pagination"></div>
-    <button class={swiperButton({color: 'black', class:"swiper-button-next"})}>
+    <button class={swiperButton({color: 'black', class:"swiper-button-next"})} aria-label="next">
       <Icon name="arrow-next"/>
     </button>
   </div>

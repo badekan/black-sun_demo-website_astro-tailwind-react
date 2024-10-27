@@ -1,7 +1,8 @@
 ---
-import HeroWidgets from '../molecules/HeroWidgets.astro';
-import Button, { ButtonIcon } from '../atoms/Button.astro';
-import Section from '../layouts/Section.astro';
+import HeroLandingWidgets from './HeroLandingWidgets.astro';
+import Button from '../../atoms/Button';
+import Section from '../../layouts/Section.astro';
+import { IconName } from '../../atoms/Icon';
 ---
 <Section>
   <div class="mx-auto flex flex-col md:flex-row justify-between gap-14 items-start">
@@ -11,10 +12,10 @@ import Section from '../layouts/Section.astro';
       <div class="text-lg leading-normal">
         <p>We offers end  end-to-end solutions, encompassing software development, UX/UI design, app, and resource hiring services.</p>
       </div>
-      <Button label="Schedule Call" icon={ButtonIcon.Chat} className="mt-9" />	
+      <Button label="Schedule Call" icon={IconName.Chat} className="mt-9"/>	
     </div>
     <div class={`w-full md:w-1/2`}>
-      <HeroWidgets title="We provide"/>					
+      <HeroLandingWidgets title="We provide"/>					
     </div>
   </div>
 </Section>

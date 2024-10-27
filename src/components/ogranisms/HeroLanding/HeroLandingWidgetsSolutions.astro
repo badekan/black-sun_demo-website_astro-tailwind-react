@@ -1,12 +1,12 @@
 ---
-import HeroSolutionsItem from '../atoms/HeroSolutionsItem.astro';
+import HeroLandingWidgetsSolutionsItem from './HeroLandingWidgetsSolutionsItem.astro';
 
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
-const heroSolutionsItems = [
+const items = [
   {
     title: 'UX/UI',
     subtitle: 'Design',
@@ -32,9 +32,9 @@ const heroSolutionsItems = [
 <div class="bg-gray-900 rounded-2xl px-6 py-8 md:px-7 md:py-9 overflow-hidden w-full">
   <h2 class="font-semibold text-white text-2xl mb-6">{title}</h2>
   <ul class="-mb-[84px]">
-    {heroSolutionsItems.map((item) => (
+    {items.map((item) => (
       <li class="mb-4">
-        <HeroSolutionsItem title={item.title} subtitle={item.subtitle} icon={item.icon} />
+        <HeroLandingWidgetsSolutionsItem title={item.title} subtitle={item.subtitle} icon={item.icon} />
       </li>
     ))}
   </ul>
