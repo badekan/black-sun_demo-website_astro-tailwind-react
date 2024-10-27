@@ -1,0 +1,35 @@
+---
+import Section from '../layouts/Section.astro';
+import { Image } from 'astro:assets';
+import ImgHeroWidget from '../../img/hero-widgets.jpg';
+import Button, { ButtonIcon } from '../atoms/Button.astro';
+
+const paddingGapDesktop = "md:pr-8 md:pb-8";
+const imageGapDesktop = "md:left-8 md:top-8";
+const paddingGapMobile = "pr-6 pb-6";
+const imageGapMobile = "left-6 top-6";
+
+const paddingGap = `${paddingGapDesktop} ${paddingGapMobile}`;
+const imageGap = `${imageGapDesktop} ${imageGapMobile}`;
+---
+<Section>
+    <div class="flex justify-between gap-14 md:gap-col1 flex-wrap md:flex-nowrap">
+      <div class="w-full md:max-w-col6">
+        <div class={`w-full ${paddingGap}`}>
+          <div class="w-full aspect-[514/376] bg-gray-200 rounded-2xl relative">
+            <Image class={`object-cover w-full h-full absolute ${imageGap} rounded-2xl`} src={ImgHeroWidget} alt="." />
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:max-w-col5">
+        <p class="text-2xl xs:text-3xl font-regular mb-1">Why us?</p>
+        <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold mb-4">
+          We make goods wich offer infinite possibilities
+        </h2>
+        <div class="text-lg leading-normal max-w-[450px]">
+          <p>We work with the most successful businesses, in the world, giving you an unmatched level ofexpertise and experience.</p>
+        </div>
+        <Button label="Schedule Call" icon={ButtonIcon.Chat} className="mt-9" />
+      </div>
+    </div>
+</Section>

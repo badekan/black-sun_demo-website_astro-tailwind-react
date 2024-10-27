@@ -1,0 +1,31 @@
+---
+import HeaderMobile from './HeaderMobile.astro';
+import HeaderDesktop from './HeaderDesktop.astro';
+import Wrapper from '../../layouts/Wrapper.astro';
+import Container from '../../layouts/Container.astro';
+
+const nav = [
+	{
+		label: 'Solution',
+		href: 'https://www.google.be',
+	},
+	{
+		label: 'Services',
+		href: 'https://www.google.be',
+	},
+	{
+		label: 'Company',
+		href: 'https://www.google.be',
+	},
+	{
+		label: 'Client',
+		href: 'https://www.google.be',
+	},
+]
+---
+<Wrapper className='mt-10'>
+  <Container>
+    <HeaderDesktop nav={nav} />
+    <HeaderMobile nav={nav} />
+  </Container>
+</Wrapper>

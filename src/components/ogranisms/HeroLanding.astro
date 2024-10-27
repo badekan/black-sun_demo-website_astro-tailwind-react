@@ -1,0 +1,20 @@
+---
+import HeroWidgets from '../molecules/HeroWidgets.astro';
+import Button, { ButtonIcon } from '../atoms/Button.astro';
+import Section from '../layouts/Section.astro';
+---
+<Section>
+  <div class="mx-auto flex flex-col md:flex-row justify-between gap-14 items-start">
+    <div class={`w-full md:w-1/2 md:max-w-[28.25rem]` /* 452px / 16 = 28.25rem */ }>
+      <p class="text-2xl xs:text-3xl font-regular mb-1">Global agency</p>
+      <h1 class="leading-snug text-3xl xs:leading-snug xs:text-4xl lg:leading-snug lg:text-5xl font-bold mb-4">Transformative brands, special by digital product</h1>
+      <div class="text-lg leading-normal">
+        <p>We offers end  end-to-end solutions, encompassing software development, UX/UI design, app, and resource hiring services.</p>
+      </div>
+      <Button label="Schedule Call" icon={ButtonIcon.Chat} className="mt-9" />	
+    </div>
+    <div class={`w-full md:w-1/2`}>
+      <HeroWidgets title="We provide"/>					
+    </div>
+  </div>
+</Section>

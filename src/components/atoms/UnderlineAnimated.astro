@@ -1,0 +1,57 @@
+---
+import { tv } from 'tailwind-variants';
+
+const headerLink = tv({
+  base: [
+    "inline-block overflow-hidden relative padding-0 pb-[5px] color-black",
+    "before:absolute before:left-0 before:bottom-0 before:w-full before:h-[1px] before:bg-black",
+  ],
+  variants: {
+    direction: {
+      inout: [
+        'before:scale-x-0 before:origin-bottom-right before:transition-transform before:duration-300 before:ease-[cubic-bezier(.165,.84,.44,1)]', // Before
+        'hover:before:scale-x-100 hover:before:origin-bottom-left' // Hover Before
+      ],
+      inback: [
+        'before:transition-transform before:duration-300 before:ease-[cubic-bezier(.25,.1,.25,1)] before:-translate-x-[101%]', // Before
+        'hover:before:translate-x-[100]' // Hover Before
+      ],
+    },
+  },
+});
+---
+<a href="" class={headerLink({direction: 'inback'})}>
+  Coucou
+</a> 
+
+<!-- 
+<style>
+  .link-underline{
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    padding-bottom: 5px;
+    color: black;
+  }
+  
+  .link-underline:before{
+    content:'';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 1px;
+    background-color: black;
+    /* transform: scaleX(0);
+    transform-origin: right bottom;
+    transition: transform .3s cubic-bezier(.165,.84,.44,1); */
+    transition: all .3s ease;
+    transform: translate3d(-101%,0,0);
+  }
+
+  .link-underline:hover:before{
+    /* transform: scaleX(1);
+    transform-origin: left bottom; */
+    transform: translate3d(0,0,0);
+  }
+</style>
+ -->

@@ -1,0 +1,24 @@
+---
+import { tv } from 'tailwind-variants';
+
+interface Props {
+  label: string;
+  href: string;
+}
+
+const { label, href } = Astro.props;
+
+const headerLink = tv({
+  base: [
+    "font-semibold border-0 rounded-md px-1 py-0",
+    "transition-btn duration-500 cursor-pointer", /* Base */ 
+    "hover:bg-gray-100 hover:shadow-[0_0_0_3px_rgba(0,0,0,1)] hover:shadow-gray-100", /* Hover */ 
+    "active:duration-300 active:shadow-[0_0_0_4px_rgba(0,0,0,1)] active:shadow-gray-100", /* Active */ 
+    "focus-visible:outline-2", /* Focus Visible */ 
+  ],
+});
+
+---
+<a href={href} class={headerLink()} >
+  {label}
+</a> 

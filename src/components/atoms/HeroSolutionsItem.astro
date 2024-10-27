@@ -1,0 +1,38 @@
+---
+import { tv } from 'tailwind-variants';
+import { Icon } from 'astro-icon/components';
+import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  icon: string;
+}
+
+const heroLandingSolutionsItems = tv({
+  extend: hoverBaseAndVariant,
+  base: [
+    "inline-flex w-full gap-5 px-4 py-4 rounded-lg",
+  ],
+  variants: {
+    color: {
+      whiteFade: true,
+    }
+  }
+});
+
+const { title, subtitle, icon } = Astro.props;
+---
+<button class={heroLandingSolutionsItems({color: 'whiteFade', })}>
+  <div class="w-11 h-11 rounded-full shrink-0 bg-white flex items-center justify-center">
+    <Icon class={`w-[1.5rem] h-[1.5rem]` /* 24px / 16 = 1.5rem */} name={icon} />
+  </div>
+  <div class="text-white text-left overflow-hidden">
+    <p class="font-semibold text-xl leading-tight overflow-hidden whitespace-nowrap text-ellipsis">
+      {title}
+    </p> 
+    <p class="text-sm leading-tight overflow-hidden whitespace-nowrap text-ellipsis">
+      {subtitle}
+    </p> 
+  </div>
+</button>

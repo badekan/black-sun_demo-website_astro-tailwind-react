@@ -1,0 +1,34 @@
+---
+import { tv } from 'tailwind-variants';
+import { Image } from 'astro:assets';
+import ImgHeroWidget from '../../img/hero-widgets.jpg';
+
+import HeroSolutions from './HeroSolutions.astro';
+import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant';
+
+const heroLandingWidgetsNumber = tv({
+  extend: hoverBaseAndVariant,
+  base: [
+    "w-full h-1/2 grow rounded-2xl flex flex-col items-center justify-center p-7 text-center",
+  ],
+  variants: {
+    color: {
+      gray: true,
+    }
+  }
+});
+---
+<div class="flex gap-6">
+  <div class="w-full sm:w-1/2 md:w-full md:xl:max-w-none xl:w-[55%] shrink-0">
+    <HeroSolutions title="We provide"/>
+  </div>
+  <div class="flex-col gap-6 sm:flex w-1/2 hidden md:w-full md:hidden xl:flex">
+    <div class={heroLandingWidgetsNumber({color: "gray"})}>
+      <p class="font-semibold text-4xl leading-snug">50+</p>
+      <p class="text-lg leading-tight">Talented team member</p>
+    </div>
+    <div class="bg-gray-200 w-full h-1/2 grow rounded-2xl overflow-hidden relative">
+      <Image class="object-cover w-full h-full absolute" src={ImgHeroWidget} alt="." />
+    </div>
+  </div>
+</div>

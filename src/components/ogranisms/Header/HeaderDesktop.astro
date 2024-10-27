@@ -1,0 +1,28 @@
+---
+import Logo, { LogoSize } from '../../atoms/Logo.astro';
+import Button, { ButtonVariant } from '../../atoms/Button.astro';
+import HeaderLink from './HeaderLink.astro';
+
+interface Props {
+  nav: {
+    label: string;
+    href: string;
+  }[];
+}
+
+const { nav } = Astro.props;
+---
+<div class="hidden lg:block">
+  <div class="flex mx-auto items-center justify-between ">
+    <Logo size={LogoSize.Medium}/>
+    <ul class="flex gap-8">
+      {nav.map((item) => (
+        <li>
+          <HeaderLink label={item.label} href={item.href}/>
+        </li>
+      ))}
+    </ul>
+    <Button label="Contact us" variant={ButtonVariant.Black} />
+  </div>
+  
+</div>

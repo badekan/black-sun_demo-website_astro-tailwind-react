@@ -1,0 +1,43 @@
+---
+import { tv } from 'tailwind-variants';
+import { Icon } from 'astro-icon/components'
+
+export enum LogoSize {
+  Small = 'sm',
+  Medium = 'md',
+}
+
+export enum LogoColor {
+  Black = 'black',
+  White = 'white',
+}
+
+interface Props {
+  size?: LogoSize;
+  color?: LogoColor;
+  className?: string;
+}
+
+const { size, className } = Astro.props;
+
+const logo = tv({
+  base: [
+    "inline-block",
+  ],
+  variants: {
+    size: {
+      sm: "w-[121px] h-[18px]",
+      md: "w-[180px] h-[28px]",
+    },
+    color: {
+      black: "text-black",
+      white: "text-black",
+    },
+    defaultVariants: {
+      size: "md",
+      color: "black",
+    },
+  },
+});
+---
+<Icon class={logo({size, className})} name="blacksun" />

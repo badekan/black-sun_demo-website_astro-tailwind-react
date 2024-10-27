@@ -1,0 +1,168 @@
+---
+import { tv } from 'tailwind-variants';
+import Section from '../layouts/Section.astro';
+import Container from '../layouts/Container.astro';
+import CardArticle from '../molecules/CardArticle.astro';
+import { Icon } from 'astro-icon/components';
+import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant';
+
+const cardArticles = [
+  {
+    title: 'Some title about an article'
+  },
+  {
+    title: 'Some title about an article'
+  },
+  {
+    title: 'Some title about an article'
+  },
+  {
+    title: 'Some title about an article'
+  },
+  {
+    title: 'Some title about an article'
+  },
+  {
+    title: 'Some title about an article'
+  },
+  {
+    title: 'Some title about an article'
+  },
+];
+
+const swiperButton = tv({
+  extend: hoverBaseAndVariant,
+  base: [
+    `w-14 h-14 rounded-lg text-white flex items-center justify-center shrink-0`,
+  ],
+  variants: {
+    color: {
+      black: true,
+    }
+  }
+});
+
+---
+<Section>
+  <Container className="max-w-col6 text-center mb-14 sm:mb-20">
+    <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold mb-4">
+      Kepp aware of the last trends
+    </h2>
+    <Container className="text-lg max-w-col5 leading-normal">
+      <p>We work with the most successful businesses, in the world, giving you an unmatched level of expertise and experience.</p>
+    </Container>
+  </Container>
+  <!-- Slider main container -->
+  <div class="swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      {cardArticles.map((cardArticle, index) => (
+        <div class="swiper-slide">
+          <CardArticle title={cardArticle.title} /> 
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="flex gap-6 md:gap-8 items-center justify-center mt-16">
+    <button class={swiperButton({color: 'black', class:"swiper-button-prev"})}>
+      <Icon name="arrow-prev"/>
+    </button>
+    <div class="swiper-pagination"></div>
+    <button class={swiperButton({color: 'black', class:"swiper-button-next"})}>
+      <Icon name="arrow-next"/>
+    </button>
+  </div>
+  <style is:global>
+    /* Slides */
+    .swiper {
+      overflow: visible !important;
+      width: 80% !important;
+      margin-left: 0 !important;
+    }
+    
+    @media (min-width: 640px) { 
+      .swiper {
+        overflow: visible !important;
+        width: 40% !important;
+      }
+    }
+    @media (min-width: 1024px) { 
+      .swiper{
+        width: 100% !important;
+        margin-left: auto !important;
+      }
+    }
+    .swiper-slide{
+      transition: all .3s ease !important;
+      opacity: 0;
+    }
+    .swiper-slide-active,
+    .swiper-slide-next,
+    .swiper-slide-next + .swiper-slide{
+      opacity: 1;
+    }
+    /* Navigation */
+    .swiper-button-disabled{
+      pointer-events: none;
+      background: theme('colors.gray.200');
+    }
+    /* Pagination */
+    .swiper-pagination{
+      background: theme('colors.gray.100');
+      padding: theme('spacing.3');
+      border-radius: theme('borderRadius.lg');
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: theme('spacing.1') theme('spacing.2');
+    }
+    .swiper-pagination-bullet{
+      background: theme('colors.gray.300');
+      width: theme('spacing.2');
+      height: theme('spacing.2');
+      border-radius: theme('borderRadius.full');
+    }
+    .swiper-pagination-bullet-active{
+      background: theme('colors.black');
+    }
+  </style>
+  <script>
+    // core version + navigation, pagination modules:
+    import Swiper from 'swiper';
+    import { Navigation, Pagination } from 'swiper/modules';
+    // import Swiper and modules styles
+    import 'swiper/css';
+    // import 'swiper/css/navigation';
+    // import 'swiper/css/pagination';
+    // init Swiper:
+    const swiper = new Swiper('.swiper', {
+      // configure Swiper to use modules
+      modules: [Navigation, Pagination],
+
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+      // Responsive
+      slidesPerView: 1,
+      spaceBetween: 21,
+
+      breakpoints: {
+        
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 24,
+        },
+      },
+    
+    });
+  </script>
+</Section>

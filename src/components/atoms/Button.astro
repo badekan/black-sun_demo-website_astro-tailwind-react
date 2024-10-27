@@ -1,0 +1,55 @@
+---
+import { tv } from 'tailwind-variants';
+import { Icon } from 'astro-icon/components'
+import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant.js';
+
+// A la base Button ressemblais ça, (jusqu'a ce que je l'optimise):
+// [
+//   "items-center min-h-btn bg-primary-500 text-white rounded-lg inline-flex px-4 py-[11px] gap-3 transition-btn duration-300 ", /* Base */ 
+//   "active:shadow-[0_0_0_2px_rgba(0,0,0,1)] active:shadow-primary-600", /* Active */ 
+//   "focus-visible:outline-2 focus-visible:outline-gray-500/[.3]", /* Focus Visible */ 
+//   "hover:shadow-[0_0_0_1px_rgba(0,0,0,1)] hover:shadow-primary-600 hover:bg-primary-600", /* Hover */ 
+// ]
+
+export enum ButtonVariant {
+  Primary = 'primary',
+  Black = 'black',
+  White = 'white',
+}
+
+export enum ButtonIcon {
+  Chat = 'chat',
+}
+
+interface Props {
+  className?: string;
+  variant?: ButtonVariant;
+  label: string;
+  icon?: ButtonIcon;
+}
+
+const button = tv({
+  extend: hoverBaseAndVariant,
+  base: [
+      "items-center min-h-btn text-white rounded-lg inline-flex px-4 py-[11px] gap-3",
+    ],
+  variants: {
+    color: {
+      primary: true,
+      black: true,
+      white: true,
+    },
+  },
+});
+
+const { className, variant, label, icon } = Astro.props;
+
+---
+<a class={button({ color: variant ? variant :  ButtonVariant.Primary, class: className })} href="#">
+  <span>
+    {label}
+  </span>
+  {icon && icon === ButtonIcon.Chat &&  (
+    <Icon name="chat" class={`w-[2.125rem] h-[2.125rem] shrink-0 -mr-1` /* 34px / 16 = 2.125rem */}/>
+  )}
+</a>
