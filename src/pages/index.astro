@@ -1,18 +1,67 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import HeroLanding from '../components/ogranisms/HeroLanding/HeroLanding.astro';
-import SectionClients from '../components/ogranisms/SectionClients.astro';
+import SectionClients, { type SectionClientsItemsData } from '../components/ogranisms/SectionClients.astro';
 import SectionWhy from '../components/ogranisms/SectionWhy.astro';
 import SectionNumber from '../components/ogranisms/SectionNumber.astro';
 import SectionArticles from '../components/ogranisms/SectionArticles.astro';
 import Footer from '../components/ogranisms/Footer.astro';
 import Header from '../components/ogranisms/Header/Header.astro';
+import { IconName } from '../components/atoms/Icon';
+
+// Section Clients
+import ImgLogoChanel from '../img/logo-chanel.svg';
+import ImgLogoDior from '../img/logo-dior.svg';
+import ImgLogoMercedes from '../img/logo-mercedes.svg';
+import ImgLogoNike from '../img/logo-nike.svg';
+import ImgLogoRenault from '../img/logo-renault.svg';
+import ImgLogoValentino from '../img/logo-valentino.svg';
+
+const SectionClientsItems: SectionClientsItemsData[] = [
+  {
+    src: ImgLogoNike,
+    alt: 'logo Nike',
+  },
+  {
+    src: ImgLogoMercedes,
+    alt: 'logo Mercedes',
+  },
+  {
+    src: ImgLogoChanel,
+    alt: 'logo Chanel',
+  },
+  {
+    src: ImgLogoDior,
+    alt: 'logo Dior',
+  },
+  {
+    src: ImgLogoRenault,
+    alt: 'logo Renault',
+  },
+  {
+    src: ImgLogoValentino,
+    alt: 'logo Valentino',
+  },
+];
+
 ---
 
 <Layout title="Welcome to Astro.">
 	<Header />
-	<HeroLanding />	
-	<SectionClients />
+	<HeroLanding data={{
+			suptitle: 'Global agency',
+			title: 'Transformative brands, special by digital product',
+			content: '<p>We offers end  end-to-end solutions, encompassing software development, UX/UI design, app, and resource hiring services.</p>',
+			button: {
+				label: "Schedule Call",
+				icon: IconName.Chat,
+			}
+	}}/>	
+	<SectionClients data={{
+		title: 'Joining with industry leaders.',
+		content: '<p>We work with the most successful businesses, in the world, giving you an unmatched level ofexpertise and experience.</p>',
+		items: SectionClientsItems
+	}}/>
 	<SectionWhy />
 	<SectionNumber />
 	<SectionArticles />

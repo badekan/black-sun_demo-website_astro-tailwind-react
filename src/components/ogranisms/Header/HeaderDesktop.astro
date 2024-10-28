@@ -22,7 +22,10 @@ const { nav } = Astro.props;
         </li>
       ))}
     </ul>
-    <Button label="Contact us" variant={ButtonVariant.Black} />
+    <Button data={{
+            label: "Contact us",
+            variant: ButtonVariant.Black,
+          }} />
   </div>
   
 </div>

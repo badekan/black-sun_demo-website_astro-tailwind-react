@@ -30,7 +30,10 @@ const imageGap = `${imageGapDesktop} ${imageGapMobile}`;
         <div class="text-lg leading-normal max-w-[450px]">
           <p>We work with the most successful businesses, in the world, giving you an unmatched level ofexpertise and experience.</p>
         </div>
-        <Button label="Schedule Call" icon={IconName.Chat} className="mt-9" />
+        <Button data={{
+            label: "Schedule Call",
+            icon: IconName.Chat,
+          }} className="mt-9" />
       </div>
     </div>
 </Section>

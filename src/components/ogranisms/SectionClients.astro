@@ -2,48 +2,32 @@
 import Section from '../layouts/Section.astro';
 
 import { Image } from 'astro:assets';
-import ImgLogoChanel from '../../img/logo-chanel.svg';
-import ImgLogoDior from '../../img/logo-dior.svg';
-import ImgLogoMercedes from '../../img/logo-mercedes.svg';
-import ImgLogoNike from '../../img/logo-nike.svg';
-import ImgLogoRenault from '../../img/logo-renault.svg';
-import ImgLogoValentino from '../../img/logo-valentino.svg';
 
-const clients = [
-  {
-    src: ImgLogoNike,
-    alt: 'logo Nike',
-  },
-  {
-    src: ImgLogoMercedes,
-    alt: 'logo Mercedes',
-  },
-  {
-    src: ImgLogoChanel,
-    alt: 'logo Chanel',
-  },
-  {
-    src: ImgLogoDior,
-    alt: 'logo Dior',
-  },
-  {
-    src: ImgLogoRenault,
-    alt: 'logo Renault',
-  },
-  {
-    src: ImgLogoValentino,
-    alt: 'logo Valentino',
-  },
-];
+export interface SectionClientsItemsData {
+  src: ImageMetadata;
+  alt: string;
+}
+
+export interface SectionClientsData {
+  title: string;
+  content: string;
+  items: SectionClientsItemsData[]
+}
+
+interface Props {
+  data: SectionClientsData
+}
+
+const { data } = Astro.props;
+const { title, content, items } = data;
 
 ---
 <Section gray>
     <div class="mb-14 sm:mb-20">
       <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold mb-4">
-        Joining with industry leaders.
+        {title}
       </h2>
-      <div class="text-lg leading-normal max-w-[450px]">
-        <p>We work with the most successful businesses, in the world, giving you an unmatched level ofexpertise and experience.</p>
+      <div class="text-lg leading-normal max-w-[450px]" set:html={content}>
       </div>
     </div>
     <ul class={[
@@ -51,9 +35,9 @@ const clients = [
         "lg:flex lg:items-center lg:gap-10 lg:justify-between",
         "grid grid-cols-3 gap-10 items-center justify-between",
       ].join(' ')}>
-      {clients.map((client, index) => (
+      {items.map((item, index) => (
         <li class={index === 0 || index % 3 === 0 ? "flex justify-start" : (index + 1) % 3 === 0 ? "flex justify-end":'flex justify-center'}>
-          <Image class={"max-w-[6.56rem] max-h-[3.25rem] sm:max-w-none sm:max-h-none" /* 105/16=6.56, 52/16=3.25 */} src={client.src} alt={client.alt}/>
+          <Image class={"max-w-[6.56rem] max-h-[3.25rem] sm:max-w-none sm:max-h-none" /* 105/16=6.56, 52/16=3.25 */} src={item.src} alt={item.alt}/>
         </li>
       ))}
     </ul>

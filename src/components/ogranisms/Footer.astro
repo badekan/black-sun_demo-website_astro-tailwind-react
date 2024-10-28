@@ -128,7 +128,10 @@ const footerLink = tv({
             `absolute bottom-0 -translate-x-1/2 left-1/2 translate-y-[6px] -rotate-90 origin-bottom-left`,
             ].join(' ')}/>
           <div class="text-white text-lg"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum voluptas accusantium cum odio nam nesciunt illo nostrum quia.</p></div>
-          <Button label="Schedule Call" icon={IconName.Chat} className="shrink-0" />
+          <Button data={{
+            label: "Schedule Call",
+            icon: IconName.Chat,
+          }} className="shrink-0" />
         </div>
       </div>
     </Container>

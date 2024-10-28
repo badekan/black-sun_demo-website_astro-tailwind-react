@@ -7,21 +7,30 @@ import Container from '../../layouts/Container.astro';
 const nav = [
 	{
 		label: 'Solution',
-		href: 'https://www.google.be',
+		href: '#',
 	},
 	{
 		label: 'Services',
-		href: 'https://www.google.be',
+		href: '#',
 	},
 	{
 		label: 'Company',
-		href: 'https://www.google.be',
+		href: '#',
 	},
 	{
 		label: 'Client',
-		href: 'https://www.google.be',
+		href: '#',
+	},
+	{
+		label: 'Contact us',
+		href: '#',
+		isButton: true,
 	},
 ]
+
+const headerData = {
+	nav: nav,
+}
 ---
 <Wrapper className='mt-10'>
   <Container>

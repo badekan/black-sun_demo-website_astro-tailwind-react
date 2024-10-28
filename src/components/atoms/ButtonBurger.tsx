@@ -9,7 +9,7 @@ export enum ButtonBurgerColor {
 
 interface ButtonBurgerProps {
   color: ButtonBurgerColor;
-  active?: boolean;
+  isActive?: boolean;
   onClick: () => void;
 }
 
@@ -71,9 +71,7 @@ const lineBottom = tv({
 
 /* Component */
 const ButtonBurger = (props: ButtonBurgerProps) => {
-  const { color, active,  onClick } = props;
-
-  // const [isActive, setIsActive] = useState(false);
+  const { color, isActive,  onClick } = props;
 
   const handleClick = () => {
     onClick();
@@ -82,8 +80,8 @@ const ButtonBurger = (props: ButtonBurgerProps) => {
   return (
     <button className={buttonBurger({color})} onClick={handleClick}>
       <div className="w-[30px] h-[12px] relative">
-        <div className={lineTop({color, state: active ? 'active':'inactive'})}></div>
-        <div className={lineBottom({color, state: active ? 'active':'inactive'})}></div>
+        <div className={lineTop({color, state: isActive ? 'active':'inactive'})}></div>
+        <div className={lineBottom({color, state: isActive ? 'active':'inactive'})}></div>
       </div>
     </button>
   );

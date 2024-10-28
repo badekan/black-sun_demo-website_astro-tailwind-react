@@ -12,11 +12,16 @@ export enum ButtonVariant {
   White = 'white',
 }
 
-interface ButtonProps {
-  className?: string;
+export interface ButtonData {
   variant?: ButtonVariant;
   label: string;
   icon?: IconName;
+  href?: string;
+}
+
+interface ButtonProps {
+  className?: string;
+  data: ButtonData;
 }
 
 /* Style */
@@ -39,12 +44,14 @@ const button = tv({
 
 /* Component */
 const Button = (props: ButtonProps) => {
-  const { variant, label, icon, className } = props;
+  const { data, className } = props;
+  const { variant, label, icon, href } = data;
+
   return (
-    <button className={button({ color: variant, class: className })}>
+    <a className={button({ color: variant, class: className })} href={href}>
       {label}
       {icon && <Icon name={icon} className={"-mr-[0.375rem]" /* 6px / 16 = .375rem */}/>}
-    </button>
+    </a>
   );
 };
 
