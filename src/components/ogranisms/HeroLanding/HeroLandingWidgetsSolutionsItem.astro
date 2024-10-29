@@ -3,12 +3,19 @@ import { tv } from 'tailwind-variants';
 import { Icon } from 'astro-icon/components';
 import hoverBaseAndVariant from '../../../utils/hoverBaseAndVariant';
 
-interface Props {
-  title: string;
-  subtitle: string;
-  icon: string;
+/* Types */
+export interface HeroLandingWidgetsSolutionsItemData {
+  label: string;
+  sublabel?: string;
+  icon?: string;
+  href: string;
 }
 
+interface Props {
+  data: HeroLandingWidgetsSolutionsItemData;
+}
+
+/* Style */
 const heroLandingSolutionsItems = tv({
   extend: hoverBaseAndVariant,
   base: [
@@ -21,18 +28,20 @@ const heroLandingSolutionsItems = tv({
   }
 });
 
-const { title, subtitle, icon } = Astro.props;
+/* Component */
+const { data } = Astro.props;
+const { label, sublabel, href, icon } = data;
 ---
-<button class={heroLandingSolutionsItems({color: 'whiteFade', })}>
+<a class={heroLandingSolutionsItems({color: 'whiteFade', })} href={href}>
   <div class="w-11 h-11 rounded-full shrink-0 bg-white flex items-center justify-center">
-    <Icon class={`w-[1.5rem] h-[1.5rem]` /* 24px / 16 = 1.5rem */} name={icon} />
+    {icon && (<Icon class={`w-[1.5rem] h-[1.5rem]` /* 24px / 16 = 1.5rem */} name={icon} />)}
   </div>
   <div class="text-white text-left overflow-hidden">
     <p class="font-semibold text-xl leading-tight overflow-hidden whitespace-nowrap text-ellipsis">
-      {title}
+      {label}
     </p> 
-    <p class="text-sm leading-tight overflow-hidden whitespace-nowrap text-ellipsis">
-      {subtitle}
-    </p> 
+    {sublabel && (<p class="text-sm leading-tight overflow-hidden whitespace-nowrap text-ellipsis">
+      {sublabel}
+    </p> )}
   </div>
-</button>
+</a>

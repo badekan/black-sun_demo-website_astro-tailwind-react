@@ -1,41 +1,27 @@
 ---
-import HeroLandingWidgetsSolutionsItem from './HeroLandingWidgetsSolutionsItem.astro';
+import HeroLandingWidgetsSolutionsItem, { type HeroLandingWidgetsSolutionsItemData } from './HeroLandingWidgetsSolutionsItem.astro';
 
-interface Props {
+/*  Types */
+export interface HeroLandingWidgetsSolutionsData {
   title: string;
+  items?: HeroLandingWidgetsSolutionsItemData[];
 }
 
-const { title } = Astro.props;
-const items = [
-  {
-    title: 'UX/UI',
-    subtitle: 'Design',
-    icon: 'ux',
-  },
-  {
-    title: 'App',
-    subtitle: 'Development',
-    icon: 'app',
-  },
-  {
-    title: 'Software',
-    subtitle: 'Development',
-    icon: 'software',
-  },
-  {
-    title: 'Blockchain',
-    subtitle: 'Infrastructure',
-    icon: 'blockchain2',
-  },
-];
+interface Props {
+  data: HeroLandingWidgetsSolutionsData;
+}
+
+/*  Components */
+const { data } = Astro.props;
+const { title, items } = data;
 ---
 <div class="bg-gray-900 rounded-2xl px-6 py-8 md:px-7 md:py-9 overflow-hidden w-full">
   <h2 class="font-semibold text-white text-2xl mb-6">{title}</h2>
   <ul class="-mb-[84px]">
-    {items.map((item) => (
+    {items && (items.map((item) => (
       <li class="mb-4">
-        <HeroLandingWidgetsSolutionsItem title={item.title} subtitle={item.subtitle} icon={item.icon} />
+        <HeroLandingWidgetsSolutionsItem data={item} />
       </li>
-    ))}
+    )))}
   </ul>
 </div>

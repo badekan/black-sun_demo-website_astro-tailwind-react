@@ -1,5 +1,5 @@
 ---
-import HeroLandingWidgets from './HeroLandingWidgets.astro';
+import HeroLandingWidgets, { type HeroLandingWidgetsData } from './HeroLandingWidgets.astro';
 import Button, { type ButtonData } from '../../atoms/Button';
 import Section from '../../layouts/Section.astro';
 
@@ -8,6 +8,7 @@ export interface HeroLandingData {
   title: string;
   content: string;
   button?: ButtonData;
+  widgets: HeroLandingWidgetsData
 }
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
 }
 
 const { data } = Astro.props;
-const { suptitle, title, content, button } = data;
+const { suptitle, title, content, button, widgets } = data;
 ---
 <Section>
   <div class="mx-auto flex flex-col md:flex-row justify-between gap-14 items-start">
@@ -27,7 +28,7 @@ const { suptitle, title, content, button } = data;
       {button && (<Button data={{...button}} className="mt-9"/>	)}
     </div>
     <div class={`w-full md:w-1/2`}>
-      <HeroLandingWidgets title="We provide"/>					
+      <HeroLandingWidgets data={widgets} />					
     </div>
   </div>
 </Section>

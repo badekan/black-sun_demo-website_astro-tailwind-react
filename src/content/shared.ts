@@ -1,4 +1,34 @@
-const shared = {
+interface SharedData {
+  offices: string[];
+  copyright: string;
+  legalNav: {
+    label: string;
+    href: string;
+  }[];
+  newsletter: {
+    title: string;
+    placeholder: string;
+  };
+  socials: {
+    name: string;
+    icon: string;
+    href: string;
+  }[];
+  nav: {
+    label: string;
+    href: string;
+    isLogo?: boolean;
+    isButton?: boolean;
+    subnav?: {
+      label: string;
+      sublabel?: string;
+      icon?: string;
+      href: string;
+    }[];
+  }[];
+} 
+
+const sharedData: SharedData = {
   offices: [
     "Bruxelles",
     "Namur",
@@ -41,21 +71,33 @@ const shared = {
       isLogo: true,
     },
     {
-      label: "Solution",
+      label: "Solutions",
       href: "#",
       subnav: [
         {
-          label: "Home 1",
-          href: "#",
+          label: 'UX/UI',
+          sublabel: 'Design',
+          icon: 'ux',
+          href: '#',
         },
         {
-          label: "Home 2",
-          href: "#",
+          label: 'App',
+          sublabel: 'Development',
+          icon: 'app',
+          href: '#',
         },
         {
-          label: "Home 3",
-          href: "#",
-        }
+          label: 'Software',
+          sublabel: 'Development',
+          icon: 'software',
+          href: '#',
+        },
+        {
+          label: 'Blockchain',
+          sublabel: 'Development',
+          icon: 'blockchain',
+          href: '#',
+        },
       ]
     },
     {
@@ -92,4 +134,4 @@ const shared = {
   ]  
 }
 
-export default { shared };
+export default sharedData;

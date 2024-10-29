@@ -1,20 +1,20 @@
 ---
 import Logo, { LogoSize } from '../../atoms/Logo';
-import Button, { ButtonVariant } from '../../atoms/Button';
+import Button, { ButtonColor } from '../../atoms/Button';
 import HeaderLink from './HeaderLink.astro';
+import type { HeaderData } from './Header.astro';
 
 interface Props {
-  nav: {
-    label: string;
-    href: string;
-  }[];
+  data: HeaderData;
 }
 
-const { nav } = Astro.props;
+const { data } = Astro.props;
+const { logo, nav, button } = data;
+
 ---
 <div class="hidden lg:block">
   <div class="flex mx-auto items-center justify-between ">
-    <Logo size={LogoSize.Medium}/>
+    {logo && (<Logo size={LogoSize.Medium} data={logo}/>)}
     <ul class="flex gap-8">
       {nav.map((item) => (
         <li>
@@ -22,10 +22,13 @@ const { nav } = Astro.props;
         </li>
       ))}
     </ul>
-    <Button data={{
-            label: "Contact us",
-            variant: ButtonVariant.Black,
+    {button && (
+      <Button data={{
+            label: button.label,
+            href: button.href,
+            color: ButtonColor.Black,
           }} />
+    )}
   </div>
   
 </div>

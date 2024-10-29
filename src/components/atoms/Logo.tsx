@@ -11,11 +11,16 @@ export enum LogoColor {
   Black = 'black',
   White = 'white',
 }
+export interface LogoData {
+  label: string;
+  href: string;
+}
 
 interface LogoProps {
   size?: LogoSize;
   color?: LogoColor;
   className?: string;
+  data: LogoData;
 }
 
 /* Style */
@@ -42,9 +47,11 @@ const logo = tv({
 
 /* Component */
 const Logo = (props: LogoProps) => {
-  const { size, className, color } = props;
+  const { size, className, color, data } = props;
+  const { href, label } = data;
+  
   return (
-    <Icon className={logo({color, size, class: className})} name={IconName.BlackSun} />
+    <a href={href} aria-label={label} className={className}><Icon className={logo({color, size})} name={IconName.BlackSun} /></a>
   );
 };
 

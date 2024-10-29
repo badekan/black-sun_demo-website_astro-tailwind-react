@@ -11,89 +11,43 @@ import ImgCtaBlock from '../../img/cta-block.jpg';
 import Logo, { LogoSize } from '../atoms/Logo';
 import { IconName } from '../atoms/Icon';
 
-const footerSolutionsItems = [
-  {
-    label: 'Solutions',
-    bold: true,
-    href: '#',
-  },
-  {
-    label: 'Customer experiences',
-    href: '#',
-  },
-  {
-    label: 'Growth marketing',
-    href: '#',
-  },
-  {
-    label: 'Meaningful brands',
-    href: '#',
-  },
-  {
-    label: 'Sustainability',
-    href: '#',
-  },
-  {
-    label: 'Transformation',
-    href: '#',
-  }
-]
+/* Types */
+export interface FooterData {
+  logo?: {
+    label: string;
+    href: string;
+  };
+  nav: {
+    label: string;
+    href: string;
+    subnav?: {
+      label: string;
+      href: string;
+    }[];
+  }[];
+  newsletter: {
+    title: string;
+    placeholder: string;
+  };
+  offices: Array<string>;
+  socials: {
+    name: string;
+    icon: string;
+    href: string;
+  }[];
+  copyright: string;
+  legalNav: {
+    label: string;
+    href: string;
+  }[];
+}
 
-const footerServicesItems = [
-  {
-    label: 'Services',
-    bold: true,
-    href: '#',
-  },
-  {
-    label: 'Customer experiences',
-    href: '#',
-  },
-  {
-    label: 'Growth marketing',
-    href: '#',
-  },
-  {
-    label: 'Meaningful brands',
-    href: '#',
-  },
-]
+interface Props {
+  data: FooterData;
+}
 
-const footerOtherItems = [
-  {
-    label: 'Company',
-    bold: true,
-    href: '#',
-  },
-  {
-    label: 'Clients',
-    bold: true,
-    href: '#',
-  },
-]
-
-const footerItems = [
-  footerSolutionsItems,
-  footerServicesItems,
-  footerOtherItems
-]
-
-const footerFootLinks = [
-  {
-    label: 'Cookies',
-    href: '#',
-  },
-  {
-    label: 'Privacy policy',
-    href: '#',
-  },
-  {
-    label: 'Terms and conditions',
-    href: '#',
-  },
-];
-
-const footerBoldLink = tv({
+/* Style */
+const footerHeadingLink = tv({
   base: [
     "text-sm font-semibold text-black hover:underline"
   ],
@@ -105,6 +59,9 @@ const footerLink = tv({
   ],
 });
 
+/* Component */
+const { data } = Astro.props;
+const { logo, nav, legalNav, copyright, offices, newsletter } = data;
 ---
 <div>
   <Wrapper className="-mb-20 z-10 relative">
@@ -142,63 +99,71 @@ const footerLink = tv({
       <div class="flex flex-wrap items-left lg:items-start lg:flex-nowrap gap-x-6 gap-y-14 py-16 sm:py-28">
         <!-- Col 1 -->
         <div class="order-3 lg:order-none w-col3 flex flex-col gap-8">
-          <Logo size={LogoSize.Medium} />
+          {logo && (<Logo size={LogoSize.Medium} data={{ label : "black sun agency", href:"#"}}/>)}
           <ul class="flex gap-1 opacity-45 text-black text-sm">
-            <li>
-              Bruxelles
-            </li>
-            <li>
-              |
-            </li>
-            <li>
-              Namur
-            </li>
+            {offices.map((city, index)=>
+              <>
+                <li>
+                  {city}
+                </li>
+                {index !== offices.length - 1 && (<li>|</li>)}
+              </>
+            )}
           </ul>
           <ul class="flex gap-3">
-            <li>
-              <a href="#" class="text-black hover:opacity-50 transition-all" aria-label="instagram">
-                <Icon name="instagram" class="w-[20px] h-[22px]" />
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-black hover:opacity-50 transition-all" aria-label="linkedin">
-                <Icon name="linkedin" class="w-[20px] h-[20px]"/>
-              </a>
-            </li>
+            {data.socials.map((social) => (
+              <li>
+                <a href={social.href} class="text-black hover:opacity-50 transition-all" aria-label={social.name}>
+                  <Icon name={social.icon} class="w-[20px] h-[20px]"/>
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         <!-- Col 2 & 3 -->
         <nav class="order-2 lg:order-none flex gap-6 w-full lg:w-col6">
-          {footerItems.map((items)=>(<ul class="flex flex-col gap-3 w-col2">
-            {items.map((item) => (
-              <li>
-                <a href={item.href} class={item.bold?footerBoldLink():footerLink()}>{item.label}</a>
-              </li>
+
+          {nav.map((item)=>(
+            item.subnav && (
+              <ul class="flex flex-col gap-3 w-col2">
+                <li>
+                  <a href={item.href} class={footerHeadingLink()}>{item.label}</a>
+                </li>
+                {item.subnav && (item.subnav.map((item) => (
+                  <li>
+                    <a href={item.href} class={footerLink()}>{item.label}</a>
+                  </li>
+                )))}
+              </ul>
+            )
+          ))}
+
+          <ul class="flex flex-col gap-3 w-col2">
+            {nav.map((item)=>(
+                !item.subnav && (
+                  <li>
+                    <a href={item.href} class={footerHeadingLink()}>{item.label}</a>
+                  </li>
+                )
             ))}
-          </ul>))}
-          <!-- <ul class="flex flex-col gap-3 w-col2">
-            {footerServicesItems.map((item) => (
-              <li>
-                <a href={item.href} class={item.head?footerBoldLink():footerLink()}>{item.label}</a>
-              </li>
-            ))}
-          </ul> -->
+          </ul>
+
         </nav>
         <!-- Col Newsletter -->
          <div class="grow hidden lg:block"></div>
          <div class="order-1 lg:order-none w-full lg:w-col3">
-          <p class="text-sm font-semibold mb-2">Get the latest Technē news and projects straight into your inbox.</p>
+          <p class="text-sm font-semibold mb-2">{newsletter.title}</p>
           <div class="relative">
-            <input type="email" class="border-b-2 border-black w-full bg-transparent outline-none py-2 focus-visible:border-primary" placeholder="Enter your email">
+            <input type="email" class="border-b-2 border-black w-full bg-transparent outline-none py-2 focus-visible:border-primary" placeholder={newsletter.placeholder}>
             <Icon name="arrow-next" class="absolute right-0 top-1/2 -translate-y-1/2 mb-[2px]"/>
           </div>
          </div>
       </div>
        <!--/ Footer Foot -->
        <div class="border-t-[1px] border-black/[.2] py-5 flex flex-wrap gap-x-8 gap-y-5  justify-between">
-          <p class="text-sm text-black/[.3]">© 2024 Black Sun, Inc. All right reserved</p>
+          <p class="text-sm text-black/[.3]">{copyright}</p>
           <ul class="flex gap-x-8 gap-y-3 flex-wrap">
-            {footerFootLinks.map((item) => (
+            {legalNav.map((item) => (
               <li class="inline-block">
                 <a class="text-sm opacity-50 hover:opacity-70 transition-colors" href={item.href}>{item.label}</a>
               </li>

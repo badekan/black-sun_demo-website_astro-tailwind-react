@@ -2,23 +2,19 @@
 // Components
 import Layout from '../layouts/Layout.astro';
 import HeroLanding from '../components/ogranisms/HeroLanding/HeroLanding.astro';
-import SectionClients, { type SectionClientsItemsData } from '../components/ogranisms/SectionClients.astro';
+import SectionClients from '../components/ogranisms/SectionClients.astro';
 import SectionWhy from '../components/ogranisms/SectionWhy.astro';
 import SectionNumber from '../components/ogranisms/SectionNumber.astro';
 import SectionArticles from '../components/ogranisms/SectionArticles.astro';
-import Footer from '../components/ogranisms/Footer.astro';
-import Header from '../components/ogranisms/Header/Header.astro';
 
 // Content
 import data from '../content/index.ts';
 ---
 
-<Layout title="Welcome to Astro.">
-	<Header />
+<Layout title="Black Sun Agency">
 	<HeroLanding data={data.heroLandingData}/>	
 	<SectionClients data={data.sectionClients}/>
 	<SectionWhy data={data.setionWhyData} />
 	<SectionNumber data={data.sectionNumber} />
 	<SectionArticles data={data.sectionArticles}/>
-	<Footer />
 </Layout>

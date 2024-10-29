@@ -4,37 +4,32 @@ import HeaderDesktop from './HeaderDesktop.astro';
 import Wrapper from '../../layouts/Wrapper';
 import Container from '../../layouts/Container.astro';
 
-const nav = [
-	{
-		label: 'Solution',
-		href: '#',
-	},
-	{
-		label: 'Services',
-		href: '#',
-	},
-	{
-		label: 'Company',
-		href: '#',
-	},
-	{
-		label: 'Client',
-		href: '#',
-	},
-	{
-		label: 'Contact us',
-		href: '#',
-		isButton: true,
-	},
-]
 
-const headerData = {
-	nav: nav,
+/* Types */
+export interface HeaderData {
+  logo?: {
+    label: string;
+    href: string;
+  };
+  nav: {
+    label: string;
+    href: string;
+  }[];
+  button?: {
+    label: string;
+    href: string;
+  };
 }
+
+interface Props {
+	data: HeaderData;
+}
+
+const { data } = Astro.props;
 ---
 <Wrapper className='mt-10'>
   <Container>
-    <HeaderDesktop nav={nav} />
-    <HeaderMobile nav={nav} client:only />
+    <HeaderDesktop data={data} />
+    <HeaderMobile data={data} client:only />
   </Container>
 </Wrapper>

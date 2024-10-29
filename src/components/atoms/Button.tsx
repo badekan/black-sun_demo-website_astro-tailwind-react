@@ -6,14 +6,14 @@ import type { IconName } from './Icon';
 import Icon from './Icon';
 
 /* Types */
-export enum ButtonVariant {
+export enum ButtonColor {
   Primary = 'primary',
   Black = 'black',
   White = 'white',
 }
 
 export interface ButtonData {
-  variant?: ButtonVariant;
+  color?: ButtonColor;
   label: string;
   icon?: IconName;
   href?: string;
@@ -45,10 +45,10 @@ const button = tv({
 /* Component */
 const Button = (props: ButtonProps) => {
   const { data, className } = props;
-  const { variant, label, icon, href } = data;
+  const { color, label, icon, href } = data;
 
   return (
-    <a className={button({ color: variant, class: className })} href={href}>
+    <a className={button({ color, class: className })} href={href}>
       {label}
       {icon && <Icon name={icon} className={"-mr-[0.375rem]" /* 6px / 16 = .375rem */}/>}
     </a>

@@ -1,4 +1,12 @@
 ---
+// Components
+import Footer from '../components/ogranisms/Footer.astro';
+import Header from '../components/ogranisms/Header/Header.astro';
+
+// Content
+import headerData from '../content/header.ts';
+import footerData from '../content/footer.ts';
+
 interface Props {
 	title: string;
 }
@@ -18,26 +26,11 @@ const { title } = Astro.props;
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<!-- <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700@&display=swap" rel="stylesheet"> -->
-		 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
-		 <style>
-			@tailwind base;
-			@tailwind components;
-			@tailwind utilities;
-			@layer base {
-					:root {
-						--color-primary: 333deg 100% 73%;
-					}
-				}
-
-				/* @media screen and (min-width: 1660px) {
-					html{
-						font-size: 20px;
-					}
-				} */
-		 </style>
+		<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
 	</head>
 	<body>
+		<Header data={headerData} />
 		<slot />
+		<Footer data={footerData} />
 	</body>
 </html>

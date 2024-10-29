@@ -14,6 +14,9 @@ import ImgLogoMercedes from '../img/logo-mercedes.svg';
 import ImgLogoNike from '../img/logo-nike.svg';
 import ImgLogoRenault from '../img/logo-renault.svg';
 import ImgLogoValentino from '../img/logo-valentino.svg';
+import sharedData from "./shared";
+
+const heroLandingSolutions = sharedData.nav.find((item) => item.label == "Solutions");
 
 const heroLandingData: HeroLandingData = {
   suptitle: 'Global agency',
@@ -22,7 +25,17 @@ const heroLandingData: HeroLandingData = {
   button: {
     label: "Schedule Call",
     icon: IconName.Chat,
-  }
+  },
+  widgets: {
+    widgetNumber: {
+      title: '+50',
+      subtitle: 'Talented team member',
+    },
+    widgetSolutions: {
+      title: 'We provide',
+      items: heroLandingSolutions?.subnav,
+    }
+  },
 };
 
 const sectionClients: SectionClientsData = {

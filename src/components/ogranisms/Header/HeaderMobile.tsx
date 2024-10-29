@@ -4,16 +4,13 @@ import Logo, { LogoColor, LogoSize } from '../../atoms/Logo';
 import ButtonBurger, { ButtonBurgerColor } from '../../atoms/ButtonBurger';
 import Wrapper from '../../layouts/Wrapper';
 import hoverBaseAndVariant from '../../../utils/hoverBaseAndVariant';
-import Button, { ButtonVariant } from '../../atoms/Button';
+import Button, { ButtonColor } from '../../atoms/Button';
+import type { HeaderData } from './Header.astro';
 
 /* Types */
 interface HeaderMobileProps {
-  nav: {
-    label: string;
-    href: string;
-  }[];
+  data: HeaderData;
 }
-
 /* Style */
 const headerLinkMobile = tv({
   extend: hoverBaseAndVariant,
@@ -53,7 +50,9 @@ const headerSideBar = tv({
 });
 
 /* Component */
-const HeaderMobile: React.FC<HeaderMobileProps> = ({ nav }) => {
+const HeaderMobile = (props: HeaderMobileProps ) => {
+  const { data } = props;
+  const { logo, nav, button } = data;
   const [isActive, setIsActive] = useState(false);
 
   const handleBurgerClick = () => {
@@ -63,16 +62,20 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({ nav }) => {
   return (
     <div className="block lg:hidden ">
       <div className="flex mx-auto items-center justify-between">
-        <Logo size={LogoSize.Medium} className="hidden xs:inline-block"/>
-        <Logo size={LogoSize.Small} className="inline-block xs:hidden"/>
+        {logo && (
+          <>
+            <Logo size={LogoSize.Medium} className="hidden xs:inline-block" data={logo}/>
+            <Logo size={LogoSize.Small} className="inline-block xs:hidden" data={logo}/>
+          </>
+        )}
         <ButtonBurger color={ButtonBurgerColor.Black} onClick={handleBurgerClick} isActive={isActive}/>
       </div>
       <div className={headerSideBarWrapper({ state: isActive ? 'open' : 'close' })} >
         <div className={headerSideBar({state:  isActive ? 'open' : 'close' })}>
           <Wrapper>
             <div className="flex mx-auto items-center justify-between my-10">
-              <Logo size={LogoSize.Medium} color={LogoColor.White} className="hidden xs:inline-block"/>
-              <Logo size={LogoSize.Small} color={LogoColor.White} className="inline-block xs:hidden"  />
+              <Logo size={LogoSize.Medium} color={LogoColor.White} className="hidden xs:inline-block" data={logo}/>
+              <Logo size={LogoSize.Small} color={LogoColor.White} className="inline-block xs:hidden" data={logo}/>
               <ButtonBurger color={ButtonBurgerColor.White} onClick={handleBurgerClick} isActive={isActive}/>
             </div>
             <ul className="flex flex-col justify-center">
@@ -82,10 +85,13 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({ nav }) => {
                 </li>
               ))}
             </ul>
-            <Button data={{
-                    label: "Contact us",
-                    variant: ButtonVariant.White,
+            {button && (
+              <Button data={{
+                    label: button.label,
+                    href: button.href,
+                    color: ButtonColor.White,
                   }} className='w-full' />
+            )}
           </Wrapper>
         </div>
       </div>
