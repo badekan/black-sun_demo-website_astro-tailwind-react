@@ -4,13 +4,26 @@ import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets';
 import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant';
 
-interface Props {
+/* Types */
+export interface CardArticleData {
   title: string;
-  img: any;
+  tags: Array<string>;
+  img: {
+    src: ImageMetadata;
+    src2x: String;
+    alt: string;
+  };
 }
-const { title, img } = Astro.props;
-const roundedCard = "rounded-xl";
 
+interface Props {
+  data: CardArticleData;
+}
+
+const { data } = Astro.props;
+const { title, img, tags } = data;
+
+/* Style */
+const roundedCard = "rounded-xl";
 const cardArticleBody = tv({
   extend: hoverBaseAndVariant,
   base: [
@@ -26,13 +39,17 @@ const cardArticleBody = tv({
 <div class="flex flex-col gap-6">
   <!-- HEAD -->
   <div class="w-full aspect-[269/207] lg:aspect-[357/207] relative">
-    <div class="absolute left-0 bottom-0 p-4 z-10">
-      <div class="inline-flex items-center bg-white/[.8] gap-2 px-3 py-[2px] rounded-lg">
-        <span class="w-1 h-1 bg-black shrink-0 -ml-1"></span>
-        <span class="text-xs"> Design</span>
-      </div>
-    </div>
-    <Image class={`object-cover w-full h-full absolute ${roundedCard}`} src={img} alt="." />
+    <ul class="absolute left-0 bottom-0 p-4 z-10 flex gap-3">
+      {tags.map((tag) => (
+          <li>
+            <div class="inline-flex items-center bg-white/[.8] gap-2 px-3 py-[2px] rounded-lg">
+              <span class="w-1 h-1 bg-black shrink-0 -ml-1"></span>
+              <span class="text-xs"> {tag}</span>
+            </div>
+          </li>
+      ))}
+    </ul>
+    <Image class={`object-cover w-full h-full absolute ${roundedCard}`} src={img.src} srcset={`${img.src2x} 2x`} alt={img.alt} />
   </div>
   <!-- BODY -->
   <button class={cardArticleBody({color:'gray'})}>

@@ -1,32 +1,32 @@
 ---
 import Section from '../layouts/Section.astro';
 
-const numbers = [
-  {
-    number: "50+",
-    details: "Talented team member",
-  },
-  {
-    number: "25K",
-    details: "Complete live projects",
-  },
-  {
-    number: "95%",
-    details: "Client return after project",
-  },
-];
+export interface SectionNumberData {
+  title: string,
+  items: {
+    number: string,
+    details: string,
+  }[],
+}
+
+interface Props {
+  data: SectionNumberData
+}
+
+const { data } = Astro.props;
+const { title, items } = data;
+
 ---
 <Section gray>
   <div class="flex justify-between gap-9 lg:gap-col1 flex-wrap lg:flex-nowrap">
-      <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold">
-        About our<br> Successful Story
+      <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold" set:html={title}>
       </h2>
       <ul class={[
         "lg:flex lg:justify-between lg:gap-col1",
         "md:grid-cols-3",
         "gap-x-14 gap-y-9 grid grid-cols-1 xs:grid-cols-2 items-start justify-between",
       ].join(' ')}>
-        {numbers.map((number, index) => (
+        {items.map((number, index) => (
           <li class="flex flex-col w-full max-w-col2">
             <p class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold">{number.number}</p>
             <p class="text-lg leading-tight">{number.details}</p>

@@ -2,7 +2,7 @@
 import Section from '../layouts/Section.astro';
 import { Image } from 'astro:assets';
 import ImgSectionWhy from '../../img/section-why@2x.jpg';
-import Button from '../atoms/Button';
+import Button, { type ButtonData } from '../atoms/Button';
 import { IconName } from '../atoms/Icon';
 
 const paddingGapDesktop = "md:pr-8 md:pb-8";
@@ -12,6 +12,21 @@ const imageGapMobile = "left-6 top-6";
 
 const paddingGap = `${paddingGapDesktop} ${paddingGapMobile}`;
 const imageGap = `${imageGapDesktop} ${imageGapMobile}`;
+
+export interface SectionWhyData {
+  suptitle: string;
+  title: string;
+  content: string;
+  button?: ButtonData;
+}
+
+interface Props {
+  data: SectionWhyData;
+}
+
+const { data } = Astro.props;
+const { suptitle, title, content, button } = data;
+
 ---
 <Section>
     <div class="flex justify-between gap-14 md:gap-col1 flex-wrap md:flex-nowrap">
@@ -23,17 +38,13 @@ const imageGap = `${imageGapDesktop} ${imageGapMobile}`;
         </div>
       </div>
       <div class="w-full md:max-w-col5">
-        <p class="text-2xl xs:text-3xl font-regular mb-1">Why us?</p>
+        <p class="text-2xl xs:text-3xl font-regular mb-1">{suptitle}</p>
         <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold mb-4">
-          We make goods wich offer infinite possibilities
+          {title}
         </h2>
-        <div class="text-lg leading-normal max-w-[450px]">
-          <p>We work with the most successful businesses, in the world, giving you an unmatched level ofexpertise and experience.</p>
+        <div class="text-lg leading-normal max-w-[450px]" set:html={content}>
         </div>
-        <Button data={{
-            label: "Schedule Call",
-            icon: IconName.Chat,
-          }} className="mt-9" />
+        {button && (<Button data={button} className="mt-9" />)}
       </div>
     </div>
 </Section>
