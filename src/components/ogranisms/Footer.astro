@@ -7,11 +7,22 @@ import Container from '../layouts/Container.astro';
 import Wrapper from '../layouts/Wrapper';
 
 import { Image } from 'astro:assets';
-import ImgCtaBlock from '../../img/cta-block.jpg';
 import Logo, { LogoSize } from '../atoms/Logo';
 import { IconName } from '../atoms/Icon';
+import RichText from '../atoms/RichText.astro';
 
 /* Types */
+export interface FooterCtaBlock {
+  img: {
+    src: ImageMetadata;
+    src2x: String;
+    alt: string;
+  };
+  name: string;
+  role: string;
+  text: string;
+}
+
 export interface FooterData {
   logo?: {
     label: string;
@@ -40,6 +51,7 @@ export interface FooterData {
     label: string;
     href: string;
   }[];
+  ctaBlock?: FooterCtaBlock,
 }
 
 interface Props {
@@ -61,38 +73,39 @@ const footerLink = tv({
 
 /* Component */
 const { data } = Astro.props;
-const { logo, nav, legalNav, copyright, offices, newsletter } = data;
+const { logo, nav, legalNav, copyright, offices, newsletter, ctaBlock } = data;
 ---
 <div>
-  <Wrapper className="-mb-20 z-10 relative">
-    <Container>
-      <!-- Bubble Commente -->
-      <div class="w-full bg-black rounded-xl flex items-stretch flex-col-reverse lg:flex-row overflow-hidden">
-        <div class="bg-white/[.2] px-6 py-8 lg:px-9 lg:py-9 w-full  lg:w-auto">
-          <div class="h-5 lg:h-auto"></div>
-          <div class=" flex items-center gap-6">
-            <Image class={`aspect-square rounded-lg max-w-24`} src={ImgCtaBlock} alt="." />
-            <div class="text-white text-nowrap">
-              <p class="font-semibold text-lg leading-tight">Time Rogier</p>
-              <p class="text-sm">CEO</p>
+  {ctaBlock && (
+    <Wrapper className="-mb-20 z-10 relative">
+      <Container>
+        <div class="w-full bg-black rounded-xl flex items-stretch flex-col-reverse lg:flex-row overflow-hidden">
+          <div class="bg-white/[.2] px-6 py-8 lg:px-9 lg:py-9 w-full  lg:w-auto">
+            <div class="h-5 lg:h-auto"></div>
+            <div class=" flex items-center gap-6">
+              <Image class={`aspect-square rounded-lg max-w-24`} src={ctaBlock.img.src} srcset={ctaBlock.img.src2x+' 2x'} alt={ctaBlock.img.alt} />
+              <div class="text-white text-nowrap">
+                <p class="font-semibold text-lg leading-tight">{ctaBlock.name}</p>
+                <p class="text-sm">{ctaBlock.role}</p>
+              </div>
+              <div class="lg:w-5"></div>
             </div>
-            <div class="lg:w-5"></div>
+          </div>
+          <div class="flex flex-col items-start lg:flex-row gap-6 lg:gap-9 lg:items-center rounded-xl bg-black -mb-5 lg:mb-0 ml-0 lg:-ml-5 px-6 py-8 lg:px-9 lg:py-9 relative w-full lg:w-none">
+            <Icon name="arrow-bubble-prev" class={[
+              `lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 lg:-left-[3px] lg:rotate-0 lg:origin-top-left`,
+              `absolute bottom-0 -translate-x-1/2 left-1/2 translate-y-[6px] -rotate-90 origin-bottom-left`,
+              ].join(' ')}/>
+            <RichText rawHtml={ctaBlock.text} className="prose-invert"></RichText>
+            <Button data={{
+              label: "Schedule Call",
+              icon: IconName.Chat,
+            }} className="shrink-0" />
           </div>
         </div>
-        <div class="flex flex-col items-start lg:flex-row gap-6 lg:gap-9 lg:items-center rounded-xl bg-black -mb-5 lg:mb-0 ml-0 lg:-ml-5 px-6 py-8 lg:px-9 lg:py-9 relative w-full lg:w-none">
-          <Icon name="arrow-bubble-prev" class={[
-            `lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 lg:-left-[3px] lg:rotate-0 lg:origin-top-left`,
-            `absolute bottom-0 -translate-x-1/2 left-1/2 translate-y-[6px] -rotate-90 origin-bottom-left`,
-            ].join(' ')}/>
-          <div class="text-white text-lg"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum voluptas accusantium cum odio nam nesciunt illo nostrum quia.</p></div>
-          <Button data={{
-            label: "Schedule Call",
-            icon: IconName.Chat,
-          }} className="shrink-0" />
-        </div>
-      </div>
-    </Container>
-  </Wrapper>
+      </Container>
+    </Wrapper>
+  )}
   <Wrapper className={"bg-gray-100 pt-20"}>
     <Container>
       <!-- Footer Body -->

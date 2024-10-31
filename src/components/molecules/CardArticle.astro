@@ -3,10 +3,12 @@ import { tv } from 'tailwind-variants';
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets';
 import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant';
+import RichText, { RichTextSize } from '../atoms/RichText.astro';
 
 /* Types */
 export interface CardArticleData {
   title: string;
+  text: string;
   tags: Array<string>;
   img: {
     src: ImageMetadata;
@@ -19,15 +21,12 @@ interface Props {
   data: CardArticleData;
 }
 
-const { data } = Astro.props;
-const { title, img, tags } = data;
-
 /* Style */
 const roundedCard = "rounded-xl";
 const cardArticleBody = tv({
   extend: hoverBaseAndVariant,
   base: [
-    `${roundedCard} p-6 text-left`,
+    `${roundedCard} p-6 text-left grow flex flex-col`,
   ],
   variants: {
     color: {
@@ -35,8 +34,22 @@ const cardArticleBody = tv({
     }
   }
 });
+
+/* Component */
+const { data } = Astro.props;
+const { title, text, img, tags } = data;
+
+function truncate(str: string, maxLength: number) {
+  // Si la chaîne de caractères est plus courte que la longueur maximale, on la retourne telle quelle
+  if (str.length <= maxLength) {
+    return str;
+  }
+
+  // Sinon, on coupe la chaîne et on ajoute les ellipses
+  return str.substring(0, maxLength) + '...';
+}
 ---
-<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-6 h-full">
   <!-- HEAD -->
   <div class="w-full aspect-[269/207] lg:aspect-[357/207] relative">
     <ul class="absolute left-0 bottom-0 p-4 z-10 flex gap-3">
@@ -52,9 +65,9 @@ const cardArticleBody = tv({
     <Image class={`object-cover w-full h-full absolute ${roundedCard}`} src={img.src} srcset={`${img.src2x} 2x`} alt={img.alt} />
   </div>
   <!-- BODY -->
-  <button class={cardArticleBody({color:'gray'})}>
-    <p class="text-xl font-semibold leading-snug">{title}</p>
-    <p class="text-sm leading-normal">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit ....</p>
+  <button class={cardArticleBody({color:'gray'})} >
+    <p class="text-xl font-semibold leading-snug mb-1">{title}</p>
+    <RichText rawHtml={truncate(text, 55)} size={RichTextSize.Small} className="grow"/>
     <div class="w-full pt-4 flex justify-end"><Icon name="arrow-next" /></div>
   </button>
 </div>

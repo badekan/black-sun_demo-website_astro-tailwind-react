@@ -1,3 +1,7 @@
+import type { FooterCtaBlock } from "../components/ogranisms/Footer.astro";
+import ImgCtaBlock from '../img/cta-block.jpg';
+import ImgCtaBlock2x from '../img/cta-block@2x.jpg';
+
 interface SharedData {
   offices: string[];
   copyright: string;
@@ -26,6 +30,7 @@ interface SharedData {
       href: string;
     }[];
   }[];
+  ctaBlock?: FooterCtaBlock
 } 
 
 const sharedData: SharedData = {
@@ -109,11 +114,11 @@ const sharedData: SharedData = {
           href: "#",
         },
         {
-          label: "Growth marketing",
+          label: "Meaningful brands",
           href: "#",
         },
         {
-          label: "Meaningful brands",
+          label: "Accessibility",
           href: "#",
         }
       ]
@@ -131,7 +136,17 @@ const sharedData: SharedData = {
       href: "#",
       isButton: true,
     },
-  ]  
+  ],
+  ctaBlock: {
+    img:{
+      src: ImgCtaBlock,
+      src2x: ImgCtaBlock2x.src,
+      alt: 'cta block',
+    },
+    name:'Time Rogier',
+    role:'CEO',
+    text:'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum voluptas accusantium cum odio nam nesciunt illo nostrum quia.',
+  }  
 }
 
 export default sharedData;

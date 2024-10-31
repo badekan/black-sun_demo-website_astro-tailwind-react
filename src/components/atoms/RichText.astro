@@ -1,0 +1,39 @@
+---
+import { tv } from 'tailwind-variants';
+
+/* Types */
+export enum RichTextSize {
+  Small = "sm",
+  Medium = "md",
+}
+
+interface Props {
+  className?: string;
+  rawHtml?: string;
+  size?: RichTextSize;
+}
+
+/* Style */
+const richText = tv({
+  base: [
+    "prose leading-normal",
+    "prose-a:text-primary-800 prose-a:font-medium prose-a:underline prose-a:underline-offset-4 prose-a:transition-all prose-a:decoration-1",
+    "prose-ul:list-disc",
+  ],
+  variants:{
+    size: {
+      sm: "prose-sm",
+      md: "prose-lg",
+    }
+  },
+  defaultVariants: {
+    size: RichTextSize.Medium,
+  }
+});
+
+/* Component */
+const { rawHtml, className, size } = Astro.props;
+---
+<div class={richText({size, class: className})} set:html={rawHtml}>
+  </slot>
+</div>

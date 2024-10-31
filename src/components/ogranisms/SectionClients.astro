@@ -1,4 +1,6 @@
 ---
+import RichText from '../atoms/RichText.astro';
+import Title, { TitleSize, TitleTag } from '../atoms/Title.astro';
 import Section from '../layouts/Section.astro';
 
 import { Image } from 'astro:assets';
@@ -10,7 +12,7 @@ export interface SectionClientsItemsData {
 
 export interface SectionClientsData {
   title: string;
-  content: string;
+  text: string;
   items: SectionClientsItemsData[]
 }
 
@@ -19,16 +21,15 @@ interface Props {
 }
 
 const { data } = Astro.props;
-const { title, content, items } = data;
+const { title, text, items } = data;
 
 ---
 <Section gray>
     <div class="mb-14 sm:mb-20">
-      <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold mb-4">
+      <Title size={TitleSize.Medium} tag={TitleTag.H2} className='mb-4'>
         {title}
-      </h2>
-      <div class="text-lg leading-normal max-w-[450px]" set:html={content}>
-      </div>
+      </Title>
+      <RichText className="max-w-[450px]" rawHtml={text}/>
     </div>
     <ul class={[
         "w-full",

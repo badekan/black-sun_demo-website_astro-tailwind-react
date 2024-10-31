@@ -4,6 +4,8 @@ import { Image } from 'astro:assets';
 import ImgSectionWhy from '../../img/section-why@2x.jpg';
 import Button, { type ButtonData } from '../atoms/Button';
 import { IconName } from '../atoms/Icon';
+import Title, { TitleSize, TitleTag } from '../atoms/Title.astro';
+import RichText from '../atoms/RichText.astro';
 
 const paddingGapDesktop = "md:pr-8 md:pb-8";
 const imageGapDesktop = "md:left-8 md:top-8";
@@ -16,7 +18,7 @@ const imageGap = `${imageGapDesktop} ${imageGapMobile}`;
 export interface SectionWhyData {
   suptitle: string;
   title: string;
-  content: string;
+  text: string;
   button?: ButtonData;
 }
 
@@ -25,7 +27,7 @@ interface Props {
 }
 
 const { data } = Astro.props;
-const { suptitle, title, content, button } = data;
+const { suptitle, title, text, button } = data;
 
 ---
 <Section>
@@ -39,11 +41,10 @@ const { suptitle, title, content, button } = data;
       </div>
       <div class="w-full md:max-w-col5">
         <p class="text-2xl xs:text-3xl font-regular mb-1">{suptitle}</p>
-        <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold mb-4">
+        <Title size={TitleSize.Medium} tag={TitleTag.H2} className="mb-4">
           {title}
-        </h2>
-        <div class="text-lg leading-normal max-w-[450px]" set:html={content}>
-        </div>
+        </Title>
+        <RichText className="max-w-[450px]" rawHtml={text} />
         {button && (<Button data={button} className="mt-9" />)}
       </div>
     </div>

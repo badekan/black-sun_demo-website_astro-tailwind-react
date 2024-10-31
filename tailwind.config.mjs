@@ -80,12 +80,21 @@ export default {
 			transitionProperty: {
         'btn': 'color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow',
       },
+			typography: ({ theme }) => ({
+				invert: {
+					css: {
+						'--tw-prose-body': theme('colors.white'),
+					},
+				},
+			}),
 		},
 	},
+	
 	corePlugins: {
     container: false
   },
 	plugins: [
+		require('@tailwindcss/typography'),
     function ({ addComponents }) {
       addComponents({
         '.container': {
@@ -104,6 +113,6 @@ export default {
           },
         }
       })
-    }
+    },
   ]
 }

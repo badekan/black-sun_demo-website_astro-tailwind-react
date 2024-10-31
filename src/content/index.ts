@@ -21,7 +21,7 @@ const heroLandingSolutions = sharedData.nav.find((item) => item.label == "Soluti
 const heroLandingData: HeroLandingData = {
   suptitle: 'Global agency',
   title: 'Transformative brands, special by digital product',
-  content: '<p>We offers end  end-to-end solutions, encompassing software development, UX/UI design, app, and resource hiring services.</p>',
+  text: `<p>We offers end  end-to-end solutions, encompassing software development, UX/UI design, app, and resource hiring services.</p>`,
   button: {
     label: "Schedule Call",
     icon: IconName.Chat,
@@ -40,7 +40,7 @@ const heroLandingData: HeroLandingData = {
 
 const sectionClients: SectionClientsData = {
 		title: 'Joining with industry leaders.',
-		content: '<p>We work with the most successful businesses, in the world, giving you an unmatched level ofexpertise and experience.</p>',
+		text: '<p>We work with the most successful businesses, in the world, giving you an unmatched level ofexpertise and experience.</p>',
 		items: [
       {
         src: ImgLogoNike,
@@ -72,7 +72,7 @@ const sectionClients: SectionClientsData = {
 const setionWhyData: SectionWhyData = {
   suptitle: "Why us?",
   title: "We make goods wich offer infinite possibilities",
-  content: "SunApp’s main objective is to become the top glbal IT services provide, competing across different IT sectors.",
+  text: "SunApp’s main objective is to become the top glbal IT services provide, competing across different IT sectors.",
   button: {
     label: "Schedule Call",
     icon: IconName.Chat,
@@ -103,10 +103,11 @@ const articlesData: CardArticleData[] = articles.map((article):CardArticleData =
   return(
       {
         title: article.data.title,
+        text: article.data.description,
         tags: article.data.tags,
         img: {
           src: article.data.cover,
-          src2x: article.data.cover2x,
+          src2x: article.data.cover2x.src,
           alt: article.data.coverAlt,
         },
     }
@@ -116,7 +117,7 @@ const articlesData: CardArticleData[] = articles.map((article):CardArticleData =
 
 const sectionArticles: SectionArticlesData = {
   title: "Kepp aware of the last trends",
-  content: "<p>We work with the most successful businesses,in the world, giving you an unmatched level ofexpertise and experience</p>",
+  text: "<p>We work with the most successful businesses,in the world, giving you an unmatched level ofexpertise and experience</p>",
   items: articlesData
 }
 

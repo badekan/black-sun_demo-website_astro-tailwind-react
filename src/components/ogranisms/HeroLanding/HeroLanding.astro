@@ -2,11 +2,13 @@
 import HeroLandingWidgets, { type HeroLandingWidgetsData } from './HeroLandingWidgets.astro';
 import Button, { type ButtonData } from '../../atoms/Button';
 import Section from '../../layouts/Section.astro';
+import Title, { TitleSize, TitleTag } from '../../atoms/Title.astro';
+import RichText from '../../atoms/RichText.astro';
 
 export interface HeroLandingData {
   suptitle: string;
   title: string;
-  content: string;
+  text: string;
   button?: ButtonData;
   widgets: HeroLandingWidgetsData
 }
@@ -16,15 +18,14 @@ interface Props {
 }
 
 const { data } = Astro.props;
-const { suptitle, title, content, button, widgets } = data;
+const { suptitle, title, text, button, widgets } = data;
 ---
 <Section>
   <div class="mx-auto flex flex-col md:flex-row justify-between gap-14 items-start">
     <div class={`w-full md:w-1/2 md:max-w-[28.25rem]` /* 452px / 16 = 28.25rem */ }>
-      <p class="text-2xl xs:text-3xl font-regular mb-1">{suptitle}</p>
-      <h1 class="leading-snug text-3xl xs:leading-snug xs:text-4xl lg:leading-snug lg:text-5xl font-bold mb-4">{title}</h1>
-      <div class="text-lg leading-normal" set:html={content}>
-      </div>
+      <Title size={TitleSize.Small} tag={TitleTag.Span} className="mb-1">{suptitle}</Title>
+      <Title size={TitleSize.Large} tag={TitleTag.H1} className="mb-4">{title}</Title>
+      <RichText rawHtml={text}/>
       {button && (<Button data={{...button}} className="mt-9"/>	)}
     </div>
     <div class={`w-full md:w-1/2`}>

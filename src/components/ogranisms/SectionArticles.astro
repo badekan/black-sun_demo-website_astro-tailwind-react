@@ -5,10 +5,12 @@ import Container from '../layouts/Container.astro';
 import CardArticle, { type CardArticleData } from '../molecules/CardArticle.astro';
 import { Icon } from 'astro-icon/components';
 import hoverBaseAndVariant from '../../utils/hoverBaseAndVariant';
+import Title, { TitleSize, TitleTag } from '../atoms/Title.astro';
+import RichText from '../atoms/RichText.astro';
 
 export interface SectionArticlesData {
   title: string;
-  content: string;
+  text: string;
   items: CardArticleData[];
 }
 
@@ -17,7 +19,7 @@ interface Props {
 }
 
 const { data } = Astro.props;
-const { title, content, items } = data;
+const { title, text, items } = data;
 
 /* Style */
 const swiperButton = tv({
@@ -35,12 +37,11 @@ const swiperButton = tv({
 ---
 <Section className='overflow-x-clip'>
   <Container className="max-w-col6 text-center mb-14 sm:mb-20">
-    <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold mb-4">
+    <Title tag={TitleTag.H2} size={TitleSize.Medium} className="mb-4">
       {title}
-    </h2>
-    <Container className="text-lg max-w-col5 leading-normal">
-      <div set:html={content}>
-      </div>
+    </Title>
+    <Container>
+      <RichText rawHtml={text} className="max-w-[450px] mx-auto"/>
     </Container>
   </Container>
   <!-- Slider main container -->
@@ -88,12 +89,13 @@ const swiperButton = tv({
   }
   .swiper-slide{
     transition: all .3s ease !important;
-    opacity: 0;
+    opacity: 0 !important;
+    height: auto !important;
   }
   .swiper-slide-active,
   .swiper-slide-next,
   .swiper-slide-next + .swiper-slide{
-    opacity: 1;
+    opacity: 1 !important;
   }
   /* Navigation */
   .swiper-button-disabled{

@@ -1,4 +1,5 @@
 ---
+import Title, { TitleSize, TitleTag } from '../atoms/Title.astro';
 import Section from '../layouts/Section.astro';
 
 export interface SectionNumberData {
@@ -19,19 +20,20 @@ const { title, items } = data;
 ---
 <Section gray>
   <div class="flex justify-between gap-9 lg:gap-col1 flex-wrap lg:flex-nowrap">
-      <h2 class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold" set:html={title}>
-      </h2>
-      <ul class={[
-        "lg:flex lg:justify-between lg:gap-col1",
-        "md:grid-cols-3",
-        "gap-x-14 gap-y-9 grid grid-cols-1 xs:grid-cols-2 items-start justify-between",
-      ].join(' ')}>
-        {items.map((number, index) => (
-          <li class="flex flex-col w-full max-w-col2">
-            <p class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold">{number.number}</p>
-            <p class="text-lg leading-tight">{number.details}</p>
-          </li>
-        ))}
-      </ul>
+    <Title size={TitleSize.Medium} tag={TitleTag.H2}>
+      <span set:html={title}></span>
+    </Title>
+    <ul class={[
+      "lg:flex lg:justify-between lg:gap-col1",
+      "md:grid-cols-3",
+      "gap-x-14 gap-y-9 grid grid-cols-1 xs:grid-cols-2 items-start justify-between",
+    ].join(' ')}>
+      {items.map((number, index) => (
+        <li class="flex flex-col w-full max-w-col2">
+          <p class="leading-snug text-2xl xs:leading-snug xs:text-3xl lg:leading-snug lg:text-4xl font-semibold">{number.number}</p>
+          <p class="text-lg leading-tight">{number.details}</p>
+        </li>
+      ))}
+    </ul>
   </div>
 </Section>

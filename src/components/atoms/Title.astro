@@ -1,0 +1,54 @@
+--- 
+import { tv } from 'tailwind-variants';
+
+/* Types */
+export enum TitleTag {
+  H1 = 'h1',
+  H2 = 'h2',
+  H3 = 'h3',
+  H4 = 'h4',
+  H5 = 'h5',
+  H6 = 'h6',
+  Span = 'span',
+}
+
+export enum TitleSize {
+  Small = "sm",
+  Medium = "md",
+  Large = "lg",
+}
+
+interface Props {
+  className?: string;
+  size: TitleSize;
+  tag: TitleTag;
+  rawHtml?: string;
+}
+
+/* Style */
+const title = tv({
+  variants: {
+    size: {
+      sm:[
+        "text-2xl xs:text-3xl font-regular",
+        "leading-snug xs:leading-snug"
+      ],
+      md:[
+        "text-2xl xs:text-3xl lg:text-4xl font-semibold",
+        "leading-snug xs:leading-snug lg:leading-snug"
+      ],
+      lg:[
+        "text-3xl xs:text-4xl lg:text-5xl font-bold",
+        "leading-snug xs:leading-snug lg:leading-snug"
+      ],
+    }
+  }
+})
+/* Component */
+const { className, size, tag, rawHtml } = Astro.props;
+const Element = tag;
+---
+<Element class={title({size, class: className})} set:html={rawHtml}>
+  <slot/>
+</Element>
+

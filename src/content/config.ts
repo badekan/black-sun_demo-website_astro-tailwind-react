@@ -15,7 +15,7 @@ const articleCollection = defineCollection({
     }),
     coverAlt: z.string(),
     title: z.string(),
-    description: z.string().optional(),
+    description: z.string(),
     tags: z.array(z.string()),
   }),
 });
