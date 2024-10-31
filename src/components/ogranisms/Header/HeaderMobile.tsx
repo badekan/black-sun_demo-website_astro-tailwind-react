@@ -74,9 +74,13 @@ const HeaderMobile = (props: HeaderMobileProps ) => {
         <div className={headerSideBar({state:  isActive ? 'open' : 'close' })}>
           <Wrapper>
             <div className="flex mx-auto items-center justify-between my-10">
-              <Logo size={LogoSize.Medium} color={LogoColor.White} className="hidden xs:inline-block" data={logo}/>
-              <Logo size={LogoSize.Small} color={LogoColor.White} className="inline-block xs:hidden" data={logo}/>
-              <ButtonBurger color={ButtonBurgerColor.White} onClick={handleBurgerClick} isActive={isActive}/>
+              {logo && (
+                <>
+                    <Logo size={LogoSize.Medium} color={LogoColor.White} className="hidden xs:inline-block" data={logo}/>
+                    <Logo size={LogoSize.Small} color={LogoColor.White} className="inline-block xs:hidden" data={logo}/>
+                    <ButtonBurger color={ButtonBurgerColor.White} onClick={handleBurgerClick} isActive={isActive}/>
+                </>
+              )}
             </div>
             <ul className="flex flex-col justify-center">
               {nav.map((item) => (
